@@ -157,7 +157,7 @@ sources/4 = SubResource("TileSetAtlasSource_m57sf")
 
 [node name="LevelFinishDoor" parent="." instance=ExtResource("1_oqkjg")]
 z_index = 1
-position = Vector2(1122, 8)
+position = Vector2(2312, 400)
 next_scene = ExtResource("2_0ac5u")
 
 [node name="Player" parent="." instance=ExtResource("2_pay8t")]
