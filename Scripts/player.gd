@@ -3,7 +3,7 @@ extends CharacterBody2D
 # --------- VARIABLES ---------- #
 
 @export_category("Player Properties") # You can tweak these changes according to your likings
-@export var move_speed : float = 250
+@export var move_speed : float = 2500
 @export var skate_speed : float = 400
 @export var jump_force : float = 600
 @export var switch_force : float = 200
