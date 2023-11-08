@@ -100,6 +100,19 @@ point_count = 2
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_qt7d6")
+move_speed = null
+skate_speed = null
+jump_force = null
+switch_force = null
+gravity = null
+air_jumps = null
+veldecrease = null
+velincrease = null
+airveldecrease = null
+airvelincrease = null
+skatingincrease = null
+skatingdecrease = null
+switchdelay = null
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(16, 36)
@@ -148,7 +161,7 @@ color_ramp = SubResource("Gradient_3gc37")
 position = Vector2(0, 60)
 emitting = false
 amount = 50
-lifetime = 0.15
+lifetime = 0.25
 one_shot = true
 explosiveness = 1.0
 lifetime_randomness = 0.5
