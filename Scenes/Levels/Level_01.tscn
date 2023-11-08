@@ -163,19 +163,19 @@ next_scene = ExtResource("2_0ac5u")
 [node name="Player" parent="." instance=ExtResource("2_pay8t")]
 z_index = 1
 position = Vector2(150, 318)
-move_speed = null
-skate_speed = null
-jump_force = null
-switch_force = null
-gravity = null
-air_jumps = null
-veldecrease = null
-velincrease = null
-airveldecrease = null
-airvelincrease = null
-skatingincrease = null
-skatingdecrease = null
-switchdelay = null
+move_speed = 250.0
+skate_speed = 400.0
+jump_force = 600.0
+switch_force = 200.0
+gravity = 30.0
+air_jumps = 0
+veldecrease = 1200.0
+velincrease = 500.0
+airveldecrease = 0.0
+airvelincrease = 50.0
+skatingincrease = 300.0
+skatingdecrease = 50.0
+switchdelay = 0.5
 
 [node name="Coins" type="Node2D" parent="."]
 
@@ -248,6 +248,10 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 29.0
+offset_top = 58.0
+offset_right = 29.0
+offset_bottom = 58.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("6_66mfc")

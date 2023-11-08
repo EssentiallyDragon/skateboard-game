@@ -48,7 +48,6 @@ func _input(event):
 		if is_on_floor():
 			velocity.y = -switch_force
 		skating = not skating
-		Thread(undebounce)
 		
 
 func _physics_process(_delta):
