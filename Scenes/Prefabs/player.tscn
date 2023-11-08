@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://w7m6tehvvy3g"]
+[gd_scene load_steps=19 format=3 uid="uid://w7m6tehvvy3g"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_qt7d6"]
 [ext_resource type="Texture2D" uid="uid://bqa87evqdbbbo" path="res://Assets/he stander.png" id="2_bpma6"]
@@ -89,12 +89,30 @@ point_count = 3
 offsets = PackedFloat32Array(0.25, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
 
+[sub_resource type="Curve" id="Curve_i02gg"]
+max_value = 100.0
+_data = [Vector2(0, 0), 0.0, 11.4947, 0, 0, Vector2(1, 43.1579), 135.579, 0.0, 0, 0]
+point_count = 2
+
 [sub_resource type="Curve" id="Curve_n4h8r"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.467033, 0.873684), -0.941659, -0.941659, 0, 0, Vector2(1, 0), -4.61531, 0.0, 0, 0]
-point_count = 3
+_data = [Vector2(0, 0.463158), 0.0, 1.61645, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_qt7d6")
+move_speed = null
+skate_speed = null
+jump_force = null
+switch_force = null
+gravity = null
+air_jumps = null
+veldecrease = null
+velincrease = null
+airveldecrease = null
+airvelincrease = null
+skatingincrease = null
+skatingdecrease = null
+switchdelay = null
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(16, 36)
@@ -140,21 +158,23 @@ scale_amount_curve = SubResource("Curve_m2jh0")
 color_ramp = SubResource("Gradient_3gc37")
 
 [node name="switchparticles" type="CPUParticles2D" parent="."]
-position = Vector2(0, 70)
-amount = 20
-lifetime = 3.0
+position = Vector2(0, 60)
+emitting = false
+amount = 50
+lifetime = 0.25
+one_shot = true
+explosiveness = 1.0
 lifetime_randomness = 0.5
 texture = ExtResource("3_8vxmb")
-emission_shape = 1
-emission_sphere_radius = 5.0
-direction = Vector2(180, 180)
+emission_shape = 3
+emission_rect_extents = Vector2(30, 5)
+direction = Vector2(0, 0)
 spread = 180.0
-gravity = Vector2(0, 100)
-initial_velocity_min = 150.0
-initial_velocity_max = 300.0
-damping_min = 100.0
-damping_max = 300.0
-scale_amount_min = 0.2
+gravity = Vector2(0, 0)
+initial_velocity_min = 30.0
+initial_velocity_max = 125.0
+damping_curve = SubResource("Curve_i02gg")
+scale_amount_min = 0.5
 scale_amount_max = 0.5
 scale_amount_curve = SubResource("Curve_n4h8r")
 color_ramp = SubResource("Gradient_3gc37")

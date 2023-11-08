@@ -15,6 +15,8 @@ extends CharacterBody2D
 @export var airvelincrease : float = 50
 @export var skatingincrease : float = 300
 @export var skatingdecrease : float = 50
+@export var switchdelay : float = .5
+var switchdebounce : bool = false
 var jump_count : int = 1
 
 var skating: bool = false
@@ -27,14 +29,27 @@ var speed : float
 @onready var spawn_point = %SpawnPoint
 @onready var particle_trails = $ParticleTrails
 @onready var death_particles = $DeathParticles
+@onready var switch_particles = $switchparticles
 
 # --------- BUILT-IN FUNCTIONS ---------- #
 
+func undebounce():
+			OS.delay_msec(500)
+			switchdebounce = false
+			print("hello")
+
 func _input(event):
 	if Input.is_action_just_pressed("Switch Mode"):
+		if switchdebounce:
+			return
+		switchdebounce = true
+		
+		switch_particles.emitting = true
 		if is_on_floor():
 			velocity.y = -switch_force
 		skating = not skating
+		Thread(undebounce)
+		
 
 func _physics_process(_delta):
 	# Calling functions
