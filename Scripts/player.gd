@@ -33,10 +33,9 @@ var speed : float
 
 # --------- BUILT-IN FUNCTIONS ---------- #
 
-func undebounce():
-			OS.delay_msec(500)
-			switchdebounce = false
-			print("hello")
+var undebounce = func():
+	OS.delay_msec(500)
+	switchdebounce = false
 
 func _input(event):
 	if Input.is_action_just_pressed("Switch Mode"):
@@ -48,7 +47,7 @@ func _input(event):
 		if is_on_floor():
 			velocity.y = -switch_force
 		skating = not skating
-		
+		Thread.new().start(undebounce)
 
 func _physics_process(_delta):
 	# Calling functions
