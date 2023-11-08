@@ -4,7 +4,7 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if airborn:
+	if not airborn:
 		skate_speed = skate_speed * 1.10# Replace with function body.
 
 
