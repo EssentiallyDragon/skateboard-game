@@ -1,10 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://w7m6tehvvy3g"]
+[gd_scene load_steps=21 format=3 uid="uid://w7m6tehvvy3g"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_qt7d6"]
 [ext_resource type="Texture2D" uid="uid://bqa87evqdbbbo" path="res://Assets/he stander.png" id="2_bpma6"]
 [ext_resource type="Texture2D" uid="uid://dxp77wq60c2rr" path="res://Assets/Textures/CloudTexture.png" id="3_8vxmb"]
 [ext_resource type="Texture2D" uid="uid://cvc4p4i6002nt" path="res://Assets/Spritesheet/the jumber.png" id="3_mgy1a"]
 [ext_resource type="Texture2D" uid="uid://c2gi03xy87wyy" path="res://Assets/Spritesheet/shmoovin 2.png" id="4_5n2qv"]
+[ext_resource type="Texture2D" uid="uid://e70lo75u1dw4" path="res://Assets/Spritesheet/Break em.png" id="5_6puin"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7p5jx"]
 atlas = ExtResource("2_bpma6")
@@ -29,6 +30,10 @@ region = Rect2(256, 20, 127, 150)
 [sub_resource type="AtlasTexture" id="AtlasTexture_ajxqv"]
 atlas = ExtResource("4_5n2qv")
 region = Rect2(384, 20, 127, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mx4y8"]
+atlas = ExtResource("5_6puin")
+region = Rect2(0, 20, 128, 150)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4nss6"]
 animations = [{
@@ -72,6 +77,14 @@ animations = [{
 "loop": true,
 "name": &"Walk",
 "speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mx4y8")
+}],
+"loop": true,
+"name": &"skatingidle",
+"speed": 5.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n4sts"]
@@ -100,19 +113,6 @@ point_count = 2
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_qt7d6")
-move_speed = null
-skate_speed = null
-jump_force = null
-switch_force = null
-gravity = null
-air_jumps = null
-veldecrease = null
-velincrease = null
-airveldecrease = null
-airvelincrease = null
-skatingincrease = null
-skatingdecrease = null
-switchdelay = null
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(16, 36)
@@ -127,7 +127,7 @@ editor_draw_drag_margin = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_4nss6")
-animation = &"Turn"
+animation = &"skatingidle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -1)
@@ -161,7 +161,7 @@ color_ramp = SubResource("Gradient_3gc37")
 position = Vector2(0, 60)
 emitting = false
 amount = 50
-lifetime = 0.25
+lifetime = 0.15
 one_shot = true
 explosiveness = 1.0
 lifetime_randomness = 0.5

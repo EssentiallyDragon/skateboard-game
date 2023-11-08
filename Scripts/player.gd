@@ -164,24 +164,42 @@ func jump():
 
 # Handle Player Animations
 func player_animations(axis, vel, max):
-	
-	if is_on_floor():
-		if axis != 0:
-			particle_trails.emitting = true
-			if (vel / abs(vel)) == axis:
-				# vel in move direction
-				player_sprite.play("Walk", abs(vel) / max)
+	if skating:
+		if is_on_floor():
+			if axis != 0:
+				particle_trails.emitting = true
+				if (vel / abs(vel)) == axis:
+					# vel in move direction
+					player_sprite.play("Walk", abs(vel) / max)
+				else:
+					#vel against move direction
+					player_sprite.play("Turn")
 			else:
-				#vel against move direction
-				player_sprite.play("Turn")
+				#idle
+				particle_trails.emitting = false
+				player_sprite.play("skatingidle")
 		else:
-			#idle
+			#jumping
 			particle_trails.emitting = false
-			player_sprite.play("Idle")
+			player_sprite.play("Jump")
 	else:
-		#jumping
-		particle_trails.emitting = false
-		player_sprite.play("Jump")
+		if is_on_floor():
+			if axis != 0:
+				particle_trails.emitting = true
+				if (vel / abs(vel)) == axis:
+					# vel in move direction
+					player_sprite.play("Walk", abs(vel) / max)
+				else:
+					#vel against move direction
+					player_sprite.play("Turn")
+			else:
+				#idle
+				particle_trails.emitting = false
+				player_sprite.play("Idle")
+		else:
+			#jumping
+			particle_trails.emitting = false
+			player_sprite.play("Jump")
 	
 	if vel < 0: 
 		player_sprite.flip_h = true
