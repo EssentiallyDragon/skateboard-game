@@ -228,6 +228,40 @@ func jump_tween():
 
 # --------- SIGNALS ---------- #
 
+@export var mob_scene: PackedScene
+func game_over():
+	$MobTimer.stop()
+
+func new_game():
+	$Player.start($StartPosition.position)
+	$StartTimer.start()
+func _on_start_timer_timeout():
+	$MobTimer.start()
+func _on_mob_timer_timeout():
+	# Create a new instance of the Mob scene.
+	var mob = mob_scene.instantiate()
+
+	# Choose a random location on Path2D.
+	var mob_spawn_location = get_node("MobPath/MobSpawnLocation")
+	mob_spawn_location.progress_ratio = randf()
+
+	# Set the mob's direction perpendicular to the path direction.
+	var direction = mob_spawn_location.rotation + PI / 2
+
+	# Set the mob's position to a random location.
+	mob.position = mob_spawn_location.position
+
+	# Add some randomness to the direction.
+	direction += randf_range(-PI / 4, PI / 4)
+	mob.rotation = direction
+
+	# Choose the velocity for the mob.
+	var velocity = Vector2(randf_range(390.0, 175.0),0)
+	mob.linear_velocity = velocity.rotated(direction)
+
+	# Spawn the mob by adding it to the Main scene.
+	add_child(mob)
+
 # Reset the player's position to the current level spawn point if collided with any trap
 func _on_collision_body_entered(_body):
 	if _body.is_in_group("Traps"):
