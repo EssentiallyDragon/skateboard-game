@@ -16,6 +16,8 @@ extends CharacterBody2D
 @export var skatingincrease : float = 300
 @export var skatingdecrease : float = 50
 @export var switchdelay : float = .5
+@export var maxhealth : float = 100
+@export var health : float = maxhealth
 var switchdebounce : bool = false
 var jump_count : int = 1
 
@@ -268,3 +270,4 @@ func _on_collision_body_entered(_body):
 		AudioManager.death_sfx.play()
 		death_particles.emitting = true
 		death_tween()
+
