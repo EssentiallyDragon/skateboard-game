@@ -163,19 +163,6 @@ next_scene = ExtResource("2_0ac5u")
 [node name="Player" parent="." instance=ExtResource("2_pay8t")]
 z_index = 1
 position = Vector2(150, 318)
-move_speed = 250.0
-skate_speed = 400.0
-jump_force = 600.0
-switch_force = 200.0
-gravity = 30.0
-air_jumps = 0
-veldecrease = 1200.0
-velincrease = 500.0
-airveldecrease = 0.0
-airvelincrease = 50.0
-skatingincrease = 300.0
-skatingdecrease = 50.0
-switchdelay = 0.5
 
 [node name="Coins" type="Node2D" parent="."]
 
