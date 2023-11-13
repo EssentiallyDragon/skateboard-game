@@ -5,7 +5,7 @@ extends CharacterBody2D
 @export_category("Player Properties") # You can tweak these changes according to your likings
 @export var move_speed : float = 250
 @export var skate_speed : float = 400
-@export var jump_force : float = 600
+@export var jump_force : float = 6000
 @export var switch_force : float = 200
 @export var gravity : float = 30
 @export var air_jumps : int = 0
@@ -16,8 +16,6 @@ extends CharacterBody2D
 @export var skatingincrease : float = 300
 @export var skatingdecrease : float = 50
 @export var switchdelay : float = .5
-@export var maxhealth : float = 100
-@export var health : float = maxhealth
 var switchdebounce : bool = false
 var jump_count : int = 1
 
@@ -32,6 +30,9 @@ var speed : float
 @onready var particle_trails = $ParticleTrails
 @onready var death_particles = $DeathParticles
 @onready var switch_particles = $switchparticles
+@onready var readyI
+@onready var ready2
+@onready var ready3
 
 # --------- BUILT-IN FUNCTIONS ---------- #
 
@@ -270,4 +271,3 @@ func _on_collision_body_entered(_body):
 		AudioManager.death_sfx.play()
 		death_particles.emitting = true
 		death_tween()
-
