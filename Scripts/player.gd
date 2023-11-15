@@ -5,7 +5,7 @@ extends CharacterBody2D
 @export_category("Player Properties") # You can tweak these changes according to your likings
 @export var move_speed : float = 250
 @export var skate_speed : float = 400
-@export var jump_force : float = 6000
+@export var jump_force : float = 600
 @export var switch_force : float = 200
 @export var gravity : float = 30
 @export var air_jumps : int = 0
@@ -33,6 +33,7 @@ var speed : float
 @onready var readyI
 @onready var ready2
 @onready var ready3
+@onready var rng1
 
 # --------- BUILT-IN FUNCTIONS ---------- #
 

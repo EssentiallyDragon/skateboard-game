@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://Node2D.gd" id="1_2x8rw"]
 
-[node name="Upgr1" type="Node2D"]
+[node name="upgr1" type="Node2D"]
 script = ExtResource("1_2x8rw")
