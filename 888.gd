@@ -3,7 +3,7 @@ extends Node2D
 @onready var airborn
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+var ready2 = func _ready2():
 	if not airborn:
 		skate_speed + skate_speed * 0.10# Replace with function body.
 
