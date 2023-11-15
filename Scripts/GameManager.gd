@@ -5,9 +5,9 @@ extends Node2D
 @onready var ready2
 @onready var ready3
 @onready var airborn
-@onready var jump_force
-@onready var skate_speed
-@onready var move_speed
+@onready var jump_force : float = 600
+@onready var skate_speed : float = 400
+@onready var hurt_force : float = 350
 
 
 var score : int = 0
@@ -43,5 +43,5 @@ func _ready2():
 
 func _ready3():
 	if not airborn:
-		move_speed + move_speed * 0.10
+		hurt_force + hurt_force * 0.10
 		

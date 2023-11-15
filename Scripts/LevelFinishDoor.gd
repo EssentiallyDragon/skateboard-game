@@ -6,9 +6,9 @@ extends Area2D
 @onready var ready2
 @onready var ready3
 @onready var airborn
-@onready var jump_force
-@onready var skate_speed
-@onready var move_speed
+@onready var jump_force : float = 600
+@onready var skate_speed : float = 400
+@onready var hurt_force : float = 350
 
 var rand = ["readyI", "ready2", "ready3"]
 var rand2 = rand.size()
@@ -33,7 +33,7 @@ func _ready2():
 
 func _ready3():
 	if not airborn:
-		move_speed + move_speed * 0.10
+		hurt_force + hurt_force * 0.10
 
 # Load next level scene when player collide with level finish door.
 func _on_body_entered(body):
