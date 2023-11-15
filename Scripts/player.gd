@@ -7,6 +7,7 @@ extends CharacterBody2D
 @export var skate_speed : float = 400
 @export var jump_force : float = 600
 @export var switch_force : float = 200
+@export var hurt_force : float = 350
 @export var gravity : float = 30
 @export var air_jumps : int = 0
 @export var veldecrease : float = 1200
@@ -49,7 +50,31 @@ func _input(event):
 		if is_on_floor():
 			velocity.y = -switch_force
 		skating = not skating
-		Thread.new().start(undebounce)
+		Thread.new().start(undebounce) 
+
+var savedhealth = health
+func _process(dt):
+	#print(savedhealth)
+	#print(health)
+	if savedhealth != health:
+		# get i frames for a bit?
+		var clampedhealth = clamp(health, 0, maxhealth)
+		savedhealth = clampedhealth
+		health = clampedhealth
+		
+		print("owie ")
+		velocity.y = -hurt_force
+		# color
+		player_sprite.modulate = Color.RED
+		var tween = create_tween()
+		tween.tween_property(player_sprite, "modulate", Color.WHITE, .2)
+		for x in 0:
+			player_sprite.visible = false
+			await get_tree().create_timer(.05).timeout
+			player_sprite.visible = true
+			await get_tree().create_timer(.05).timeout
+		
+		# flash the player a few times
 
 func _physics_process(_delta):
 	# Calling functions
@@ -271,3 +296,7 @@ func _on_collision_body_entered(_body):
 		death_particles.emitting = true
 		death_tween()
 
+
+func _on_timer_timeout():
+	print("tick")
+	health -= 10
