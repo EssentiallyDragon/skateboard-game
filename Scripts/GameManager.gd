@@ -19,29 +19,19 @@ func add_score():
 # Loads next level
 func load_next_level(next_scene : PackedScene):
 	get_tree().change_scene_to_packed(next_scene)
+
+var cards = [
+	func():
+		jump_force + jump_force * 0.10,
+
+	func():
+		skate_speed + skate_speed * 0.10,
 	
-var rand = ["readyI", "ready2", "ready3"]
-var rand2 = rand.size()
+	func():
+		hurt_force + hurt_force * 0.10]
+var cardsize = cards.size() - 1
 
 func rng():
-	for rand in rand2:
-		randomize()
-		if "readyI"in rand:
-			_ready()
-		if "ready2" in rand:
-			_ready2()
-		if "ready3" in rand:
-			_ready3()
+	var index = randi_range(0, cardsize)
+	cards[index].call()
 
-func _ready():
-	if not airborn:
-		jump_force + jump_force * 0.10
-
-func _ready2():
-	if not airborn:
-		skate_speed + skate_speed * 0.10
-
-func _ready3():
-	if not airborn:
-		hurt_force + hurt_force * 0.10
-		
