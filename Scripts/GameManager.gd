@@ -34,4 +34,3 @@ var cardsize = cards.size() - 1
 func rng():
 	var index = randi_range(0, cardsize)
 	cards[index].call()
-
