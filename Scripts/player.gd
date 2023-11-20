@@ -70,8 +70,8 @@ func _process(dt):
 		savedhealth = clampedhealth
 		health = clampedhealth
 		
-		print("owie ")
-		velocity.y = -hurt_force
+		print("owie")
+		velocity.y = -hurt_force * 2.6
 		# color
 		player_sprite.modulate = Color.LIGHT_CORAL
 		var tween = create_tween()
