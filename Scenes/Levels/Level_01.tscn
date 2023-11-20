@@ -172,6 +172,8 @@ next_scene = ExtResource("2_0ac5u")
 [node name="Player" parent="." instance=ExtResource("2_pay8t")]
 z_index = 1
 position = Vector2(150, 318)
+air_jumps = 90
+health = 100.0
 
 [node name="MobTimer" type="Timer" parent="."]
 wait_time = 10.0
