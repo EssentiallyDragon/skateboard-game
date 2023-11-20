@@ -87,9 +87,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n4sts"]
-radius = 27.0
-height = 132.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dllpw"]
+size = Vector2(54, 129)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tvbjh"]
 size = Vector2(54, 129.25)
@@ -113,6 +112,7 @@ point_count = 2
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_qt7d6")
+metadata/_edit_horizontal_guides_ = []
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(16, 36)
@@ -130,8 +130,8 @@ sprite_frames = SubResource("SpriteFrames_4nss6")
 animation = &"Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -1)
-shape = SubResource("CapsuleShape2D_n4sts")
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_dllpw")
 
 [node name="Collision" type="Area2D" parent="."]
 
@@ -222,8 +222,4 @@ scale_amount_curve = SubResource("Curve_m2jh0")
 color = Color(1, 0, 0, 1)
 color_ramp = SubResource("Gradient_3gc37")
 
-[node name="Timer" type="Timer" parent="."]
-autostart = true
-
 [connection signal="body_entered" from="Collision" to="." method="_on_collision_body_entered"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

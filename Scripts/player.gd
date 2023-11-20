@@ -5,13 +5,13 @@ extends CharacterBody2D
 @export_category("Player Properties") # You can tweak these changes according to your likings
 @export var move_speed : float = 250
 @export var skate_speed : float = 400
-@export var jump_force : float = 600
+@export var jump_force : float = 650
 @export var switch_force : float = 200
 @export var hurt_force : float = 350
 @export var gravity : float = 30
 @export var air_jumps : int = 0
 @export var veldecrease : float = 1200
-@export var velincrease : float = 500
+@export var velincrease : float = 700
 @export var airveldecrease : float = 0
 @export var airvelincrease : float = 50
 @export var skatingincrease : float = 300
@@ -309,8 +309,3 @@ func _on_collision_body_entered(_body):
 		AudioManager.death_sfx.play()
 		death_particles.emitting = true
 		death_tween()
-
-
-func _on_timer_timeout():
-	print("tick")
-	health -= 10
