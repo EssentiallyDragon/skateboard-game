@@ -6,167 +6,55 @@ extends Area2D
 @onready var skate_speed : float = 400
 @onready var hurt_force : float = 350
 
+
+func jumpI():
+	jump_force + jump_force * 0.10
+func jumpII():
+	jump_force + jump_force * 0.25
+func jumpIII():
+	jump_force + jump_force * 0.50
+func jumpIV():
+	jump_force + jump_force * 1.00
+func jumpV():
+	jump_force + jump_force * 2.50
+func skateI():
+	skate_speed + skate_speed * 0.10
+func skateII():
+	skate_speed + skate_speed * 0.25
+func skateIII():
+	skate_speed + skate_speed * 0.50
+func skateIV():
+	skate_speed + skate_speed * 1.00
+func skateV():
+	skate_speed + skate_speed * 2.50
+func hurtI():
+	hurt_force + hurt_force * 0.10
+func hurtII():
+	hurt_force + hurt_force * 0.25
+func hurtIII():
+	hurt_force + hurt_force * 0.50
+func hurtIV():
+	hurt_force + hurt_force * 1.00
+func hurtV():
+	hurt_force + hurt_force * 2.50
+
+		
 var cards = [
-	func():
-		jump_force + jump_force * 0.10,
-
-	func():
-		skate_speed + skate_speed * 0.10,
-	
-	func():
-		hurt_force + hurt_force * 0.10,
-		
-	func():
-		jump_force + jump_force * 0.10,
-
-	func():
-		skate_speed + skate_speed * 0.10,
-	
-	func():
-		hurt_force + hurt_force * 0.10,
-		
-	func():
-		jump_force + jump_force * 0.10,
-
-	func():
-		skate_speed + skate_speed * 0.10,
-	
-	func():
-		hurt_force + hurt_force * 0.10,
-		
-	func():
-		jump_force + jump_force * 0.10,
-
-	func():
-		skate_speed + skate_speed * 0.10,
-	
-	func():
-		hurt_force + hurt_force * 0.10,
-		
-	func():
-		jump_force + jump_force * 0.10,
-
-	func():
-		skate_speed + skate_speed * 0.10,
-	
-	func():
-		hurt_force + hurt_force * 0.10,
-		
-	func():
-		jump_force + jump_force * 0.10,
-
-	func():
-		skate_speed + skate_speed * 0.10,
-	
-	func():
-		hurt_force + hurt_force * 0.10,
-		
-	func():
-		jump_force + jump_force * 0.10,
-
-	func():
-		skate_speed + skate_speed * 0.10,
-	
-	func():
-		hurt_force + hurt_force * 0.10,
-		
-	func():
-		jump_force + jump_force * 0.25,
-
-	func():
-		skate_speed + skate_speed * 0.25,
-	
-	func():
-		hurt_force + hurt_force * 0.25,
-		
-	func():
-		jump_force + jump_force * 0.25,
-
-	func():
-		skate_speed + skate_speed * 0.25,
-	
-	func():
-		hurt_force + hurt_force * 0.25,
-	func():
-		jump_force + jump_force * 0.25,
-
-	func():
-		skate_speed + skate_speed * 0.25,
-	
-	func():
-		hurt_force + hurt_force * 0.25,
-		
-	func():
-		jump_force + jump_force * 0.25,
-
-	func():
-		skate_speed + skate_speed * 0.25,
-	
-	func():
-		hurt_force + hurt_force * 0.25,
-		
-	func():
-		jump_force + jump_force * 0.25,
-
-	func():
-		skate_speed + skate_speed * 0.25,
-	
-	func():
-		hurt_force + hurt_force * 0.25,
-
-	func():
-		jump_force + jump_force * 0.50,
-
-	func():
-		skate_speed + skate_speed * 0.50,
-	
-	func():
-		hurt_force + hurt_force * 0.50,
-		
-	func():
-		jump_force + jump_force * 0.50,
-
-	func():
-		skate_speed + skate_speed * 0.50,
-	
-	func():
-		hurt_force + hurt_force * 0.50,
-		
-	func():
-		jump_force + jump_force * 0.50,
-
-	func():
-		skate_speed + skate_speed * 0.50,
-	
-	func():
-		hurt_force + hurt_force * 0.50,
-		
-	func():
-		jump_force + jump_force * 1.00,
-
-	func():
-		skate_speed + skate_speed * 1.00,
-	
-	func():
-		hurt_force + hurt_force * 1.00,
-		
-	func():
-		jump_force + jump_force * 1.00,
-
-	func():
-		skate_speed + skate_speed * 1.00,
-	
-	func():
-		hurt_force + hurt_force * 1.00,
-		
-	func():
-		jump_force + jump_force * 2.50,
-
-	func():
-		skate_speed + skate_speed * 2.50,
-	
-	func():
-		hurt_force + hurt_force * 2.50]
+	jumpI(),
+	jumpII(),
+	jumpIII(),
+	jumpIV(),
+	jumpV(),
+	skateI(),
+	skateII(),
+	skateIII(),
+	skateIV(),
+	skateV(),
+	hurtI(),
+	hurtII(),
+	hurtIII(),
+	hurtIV(),
+	hurtV()]
 var cardsize = cards.size() - 1
 
 func rng():
