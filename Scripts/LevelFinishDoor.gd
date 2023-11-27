@@ -14,7 +14,159 @@ var cards = [
 		skate_speed + skate_speed * 0.10,
 	
 	func():
-		hurt_force + hurt_force * 0.10]
+		hurt_force + hurt_force * 0.10,
+		
+	func():
+		jump_force + jump_force * 0.10,
+
+	func():
+		skate_speed + skate_speed * 0.10,
+	
+	func():
+		hurt_force + hurt_force * 0.10,
+		
+	func():
+		jump_force + jump_force * 0.10,
+
+	func():
+		skate_speed + skate_speed * 0.10,
+	
+	func():
+		hurt_force + hurt_force * 0.10,
+		
+	func():
+		jump_force + jump_force * 0.10,
+
+	func():
+		skate_speed + skate_speed * 0.10,
+	
+	func():
+		hurt_force + hurt_force * 0.10,
+		
+	func():
+		jump_force + jump_force * 0.10,
+
+	func():
+		skate_speed + skate_speed * 0.10,
+	
+	func():
+		hurt_force + hurt_force * 0.10,
+		
+	func():
+		jump_force + jump_force * 0.10,
+
+	func():
+		skate_speed + skate_speed * 0.10,
+	
+	func():
+		hurt_force + hurt_force * 0.10,
+		
+	func():
+		jump_force + jump_force * 0.10,
+
+	func():
+		skate_speed + skate_speed * 0.10,
+	
+	func():
+		hurt_force + hurt_force * 0.10,
+		
+	func():
+		jump_force + jump_force * 0.25,
+
+	func():
+		skate_speed + skate_speed * 0.25,
+	
+	func():
+		hurt_force + hurt_force * 0.25,
+		
+	func():
+		jump_force + jump_force * 0.25,
+
+	func():
+		skate_speed + skate_speed * 0.25,
+	
+	func():
+		hurt_force + hurt_force * 0.25,
+	func():
+		jump_force + jump_force * 0.25,
+
+	func():
+		skate_speed + skate_speed * 0.25,
+	
+	func():
+		hurt_force + hurt_force * 0.25,
+		
+	func():
+		jump_force + jump_force * 0.25,
+
+	func():
+		skate_speed + skate_speed * 0.25,
+	
+	func():
+		hurt_force + hurt_force * 0.25,
+		
+	func():
+		jump_force + jump_force * 0.25,
+
+	func():
+		skate_speed + skate_speed * 0.25,
+	
+	func():
+		hurt_force + hurt_force * 0.25,
+
+	func():
+		jump_force + jump_force * 0.50,
+
+	func():
+		skate_speed + skate_speed * 0.50,
+	
+	func():
+		hurt_force + hurt_force * 0.50,
+		
+	func():
+		jump_force + jump_force * 0.50,
+
+	func():
+		skate_speed + skate_speed * 0.50,
+	
+	func():
+		hurt_force + hurt_force * 0.50,
+		
+	func():
+		jump_force + jump_force * 0.50,
+
+	func():
+		skate_speed + skate_speed * 0.50,
+	
+	func():
+		hurt_force + hurt_force * 0.50,
+		
+	func():
+		jump_force + jump_force * 1.00,
+
+	func():
+		skate_speed + skate_speed * 1.00,
+	
+	func():
+		hurt_force + hurt_force * 1.00,
+		
+	func():
+		jump_force + jump_force * 1.00,
+
+	func():
+		skate_speed + skate_speed * 1.00,
+	
+	func():
+		hurt_force + hurt_force * 1.00,
+		
+	func():
+		jump_force + jump_force * 2.50,
+
+	func():
+		skate_speed + skate_speed * 2.50,
+	
+	func():
+		hurt_force + hurt_force * 2.50]
 var cardsize = cards.size() - 1
 
 func rng():
