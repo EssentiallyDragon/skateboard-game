@@ -4,23 +4,24 @@ extends CharacterBody2D
 
 @export_category("Player Properties") # You can tweak these changes according to your likings
 @export var move_speed : float = 250
-@export var skate_speed : float = 400
+@export var skate_speed : float = 450
 @export var jump_force : float = 650
 @export var switch_force : float = 200
 @export var hurt_force : float = 350
 @export var gravity : float = 30
 @export var air_jumps : int = 0
 @export var veldecrease : float = 1200
-@export var velincrease : float = 700
+@export var velincrease : float = 800
 @export var airveldecrease : float = 0
 @export var airvelincrease : float = 50
-@export var skatingincrease : float = 300
-@export var skatingdecrease : float = 50
+@export var skatingincrease : float = 160
+@export var skatingdecrease : float = 40
 @export var switchdelay : float = .5
 @export var maxhealth : float = 100
 @export var health : float = maxhealth
 @export var iframes : float = 1
 var switchdebounce : bool = false
+var crashdebounce : bool = false
 var jump_count : int = 1
 
 var skating: bool = false
@@ -40,6 +41,11 @@ var speed : float
 
 var undebounce = func():
 	OS.delay_msec(500)
+	switchdebounce = false
+	
+var undebouncecrash = func():
+	OS.delay_msec(200)
+	crashdebounce = false
 	switchdebounce = false
 
 func _input(event):
@@ -90,8 +96,21 @@ func _process(dt):
 		
 		# flash the player a few times
 
+var savedspeed : float = 0
 func _physics_process(_delta):
 	# Calling functions
+	
+	# crash:
+	var curspeed : float = get_velocity().x
+	var change = savedspeed - curspeed
+	if abs(change) > 100 and not crashdebounce:
+		crashdebounce = true
+		velocity = Vector2(change * -100, velocity.y - 250)
+		if skating:
+			skating = false
+			switchdebounce = true
+			Thread.new().start(undebouncecrash) 
+	savedspeed = get_velocity().x
 	movement(_delta)
 	cameraeffects(_delta)
 	
@@ -115,6 +134,7 @@ func cameraeffects(dt):
 
 # <-- Player Movement Code -->
 
+# TODO: change to LERP system instead of flat increase and decrease probably
 func movement(dt):
 	# Gravity
 	
