@@ -24,6 +24,9 @@ var switchdebounce : bool = false
 var crashdebounce : bool = false
 var jump_count : int = 1
 
+
+
+
 var skating: bool = false
 
 @export_category("Toggle Functions") # Double jump feature is disable by default (Can be toggled from inspector)
@@ -36,6 +39,7 @@ var speed : float
 @onready var hurt_particles = $HurtParticles
 @onready var death_particles = $DeathParticles
 @onready var switch_particles = $switchparticles
+@onready var next_scene = PackedScene
 
 # --------- BUILT-IN FUNCTIONS ---------- #
 
@@ -322,6 +326,61 @@ func _on_mob_timer_timeout():
 
 	# Spawn the mob by adding it to the Main scene.
 	add_child(mob)
+	
+func jumpI():
+	jump_force + jump_force * 0.10
+func jumpII():
+	jump_force + jump_force * 0.25
+func jumpIII():
+	jump_force + jump_force * 0.50
+func jumpIV():
+	jump_force + jump_force * 1.00
+func jumpV():
+	jump_force + jump_force * 2.50
+func skateI():
+	skate_speed + skate_speed * 0.10
+func skateII():
+	skate_speed + skate_speed * 0.25
+func skateIII():
+	skate_speed + skate_speed * 0.50
+func skateIV():
+	skate_speed + skate_speed * 1.00
+func skateV():
+	skate_speed + skate_speed * 2.50
+func hurtI():
+	hurt_force + hurt_force * 0.10
+func hurtII():
+	hurt_force + hurt_force * 0.25
+func hurtIII():
+	hurt_force + hurt_force * 0.50
+func hurtIV():
+	hurt_force + hurt_force * 1.00
+func hurtV():
+	hurt_force + hurt_force * 2.50
+
+		
+var cards = [
+	jumpI,
+	jumpII,
+	jumpIII,
+	jumpIV,
+	jumpV,
+	skateI,
+	skateII,
+	skateIII,
+	skateIV,
+	skateV,
+	hurtI,
+	hurtII,
+	hurtIII,
+	hurtIV,
+	hurtV]
+var cardsize = cards.size() - 1
+
+func rng():
+	var index = randi_range(0, cardsize)
+	cards[index].call()
+	print(index)
 
 # Reset the player's position to the current level spawn point if collided with any trap
 func _on_collision_body_entered(_body):
@@ -329,3 +388,10 @@ func _on_collision_body_entered(_body):
 		AudioManager.death_sfx.play()
 		death_particles.emitting = true
 		death_tween()
+	if _body.is_in_group("LevelFinishDoor"):
+		get_tree().call_group("Player", "death_tween") # death_tween is called here just to give the feeling of player entering the door.
+		AudioManager.level_complete_sfx.play()
+		SceneTransition.load_scene(next_scene)
+		rng()
+		
+
