@@ -40,21 +40,21 @@ func hurtV():
 
 		
 var cards = [
-	jumpI(),
-	jumpII(),
-	jumpIII(),
-	jumpIV(),
-	jumpV(),
-	skateI(),
-	skateII(),
-	skateIII(),
-	skateIV(),
-	skateV(),
-	hurtI(),
-	hurtII(),
-	hurtIII(),
-	hurtIV(),
-	hurtV()]
+	jumpI,
+	jumpII,
+	jumpIII,
+	jumpIV,
+	jumpV,
+	skateI,
+	skateII,
+	skateIII,
+	skateIV,
+	skateV,
+	hurtI,
+	hurtII,
+	hurtIII,
+	hurtIV,
+	hurtV]
 var cardsize = cards.size() - 1
 
 func rng():
