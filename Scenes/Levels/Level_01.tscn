@@ -1,8 +1,7 @@
-[gd_scene load_steps=20 format=3 uid="uid://cjanwm3sy2x37"]
+[gd_scene load_steps=19 format=3 uid="uid://cjanwm3sy2x37"]
 
 [ext_resource type="Script" path="res://Scenes/Levels/Level_01.gd" id="1_81htn"]
 [ext_resource type="PackedScene" uid="uid://cyti38f0lagf2" path="res://Scenes/Prefabs/LevelFinishDoor.tscn" id="1_oqkjg"]
-[ext_resource type="PackedScene" uid="uid://bjb3dx2x4bocm" path="res://Scenes/Levels/Level_02.tscn" id="2_0ac5u"]
 [ext_resource type="PackedScene" uid="uid://w7m6tehvvy3g" path="res://Scenes/Prefabs/player.tscn" id="2_pay8t"]
 [ext_resource type="PackedScene" uid="uid://bfmh3fm2de78o" path="res://Scenes/Prefabs/Coin.tscn" id="3_rrh80"]
 [ext_resource type="Script" path="res://Scripts/GameManager.gd" id="4_vgfkr"]
@@ -166,8 +165,8 @@ script = ExtResource("1_81htn")
 
 [node name="LevelFinishDoor" parent="." instance=ExtResource("1_oqkjg")]
 z_index = 1
-position = Vector2(2312, 400)
-next_scene = ExtResource("2_0ac5u")
+position = Vector2(400, 400)
+next_scene = null
 
 [node name="Player" parent="." instance=ExtResource("2_pay8t")]
 z_index = 1

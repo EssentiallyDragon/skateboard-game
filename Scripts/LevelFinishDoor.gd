@@ -60,6 +60,7 @@ var cardsize = cards.size() - 1
 func rng():
 	var index = randi_range(0, cardsize)
 	cards[index].call()
+	print(index)
 
 # Load next level scene when player collide with level finish door.
 func _on_body_entered(body):
