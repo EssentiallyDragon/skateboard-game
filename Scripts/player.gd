@@ -310,7 +310,6 @@ func _on_mob_timer_timeout():
 
 # card system
 func jumpI():
-	print("hi guys")
 	jump_force += 20
 func jumpII():
 	jump_force += 50
@@ -373,7 +372,7 @@ var cardsize = cards.size() - 1
 
 func rng():
 	var index = randi_range(0, cardsize)
-	cards[0].call()
+	cards[index].call()
 	print(index)
 
 func cardsfunc():
