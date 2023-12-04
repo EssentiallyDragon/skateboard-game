@@ -8,7 +8,7 @@ extends Area2D
 
 
 func jumpI():
-	jump_force + jump_force * 0.10
+	jump_force = jump_force + jump_force * 0.10
 func jumpII():
 	jump_force + jump_force * 0.25
 func jumpIII():
@@ -59,8 +59,8 @@ var cardsize = cards.size() - 1
 
 func rng():
 	var index = randi_range(0, cardsize)
-	cards[index].call()
-	print(index)
+	cards[0].call()
+	#print(index)
 
 # Load next level scene when player collide with level finish door.
 func _on_body_entered(body):
