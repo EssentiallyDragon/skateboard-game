@@ -306,39 +306,37 @@ func _on_mob_timer_timeout():
 
 	# Spawn the mob by adding it to the Main scene.
 	add_child(mob)
-
-# card system
+	
 func jumpI():
-	print("hi guys")
-	jump_force += jump_force * 0.10
+	jump_force + jump_force * 0.10
 func jumpII():
-	jump_force += jump_force * 0.25
+	jump_force + jump_force * 0.25
 func jumpIII():
-	jump_force += jump_force * 0.50
+	jump_force + jump_force * 0.50
 func jumpIV():
-	jump_force += jump_force * 1.00
+	jump_force + jump_force * 1.00
 func jumpV():
-	jump_force += jump_force * 2.50
+	jump_force + jump_force * 2.50
 func skateI():
-	skate_speed += skate_speed * 0.10
+	skate_speed + skate_speed * 0.10
 func skateII():
-	skate_speed += skate_speed * 0.25
+	skate_speed + skate_speed * 0.25
 func skateIII():
-	skate_speed += skate_speed * 0.50
+	skate_speed + skate_speed * 0.50
 func skateIV():
-	skate_speed += skate_speed * 1.00
+	skate_speed + skate_speed * 1.00
 func skateV():
-	skate_speed += skate_speed * 2.50
+	skate_speed + skate_speed * 2.50
 func hurtI():
-	hurt_force += hurt_force * 0.10
+	hurt_force + hurt_force * 0.10
 func hurtII():
-	hurt_force += hurt_force * 0.25
+	hurt_force + hurt_force * 0.25
 func hurtIII():
-	hurt_force += hurt_force * 0.50
+	hurt_force + hurt_force * 0.50
 func hurtIV():
-	hurt_force += hurt_force * 1.00
+	hurt_force + hurt_force * 1.00
 func hurtV():
-	hurt_force += hurt_force * 2.50
+	hurt_force + hurt_force * 2.50
 
 		
 var cards = [
@@ -361,14 +359,19 @@ var cardsize = cards.size() - 1
 
 func rng():
 	var index = randi_range(0, cardsize)
-	cards[0].call()
+	cards[index].call()
 	print(index)
 
-func cardsfunc():
-	while true:
-		await get_tree().create_timer(1).timeout
+# Reset the player's position to the current level spawn point if collided with any trap
+func _on_collision_body_entered(_body):
+	if _body.is_in_group("Traps"):
+		AudioManager.death_sfx.play()
+		death_particles.emitting = true
+		death_tween()
+	if _body.is_in_group("LevelFinishDoor"):
+		get_tree().call_group("Player", "death_tween") # death_tween is called here just to give the feeling of player entering the door.
+		AudioManager.level_complete_sfx.play()
+		SceneTransition.load_scene(next_scene)
 		rng()
-		print(jump_force)
+		
 
-func _ready():
-	cardsfunc()

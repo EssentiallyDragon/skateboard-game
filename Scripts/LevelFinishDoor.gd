@@ -6,6 +6,8 @@ extends Area2D
 @onready var skate_speed : float = 400
 @onready var hurt_force : float = 350
 @onready var air_jumps : int = 0
+@onready var maxhealth : float = 100
+@onready var velincrease : float = 700
 
 func jumpI():
 	jump_force + jump_force * 0.10
@@ -39,6 +41,13 @@ func hurtV():
 	hurt_force + hurt_force * 2.50
 func plusJump():
 	air_jumps += 1
+func plusHealth():
+	maxhealth += 50
+func plusVel():
+	velincrease += 50
+
+
+
 
 		
 var cards = [
