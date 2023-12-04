@@ -213,25 +213,24 @@ func player_animations(axis, vel, max):
 	if skating:
 		if is_on_floor():
 			if axis != 0:
-				particle_trails.emitting = true
 				if (vel / abs(vel)) == axis:
 					# vel in move direction
-					player_sprite.play("Walk", abs(vel) / max)
+					player_sprite.play("skatingslide", abs(vel) / max)
 				else:
 					#vel against move direction
-					player_sprite.play("Turn")
+					player_sprite.play("skatingslide")
 			else:
 				#idle
-				particle_trails.emitting = false
-				player_sprite.play("skatingidle")
+				if abs(vel) >= 10:
+					player_sprite.play("skatingslide")
+				else:
+					player_sprite.play("skatingidle")
 		else:
 			#jumping
-			particle_trails.emitting = false
-			player_sprite.play("Jump")
+			player_sprite.play("skatingslide")
 	else:
 		if is_on_floor():
 			if axis != 0:
-				particle_trails.emitting = true
 				if (vel / abs(vel)) == axis:
 					# vel in move direction
 					player_sprite.play("Walk", abs(vel) / max)
@@ -240,12 +239,15 @@ func player_animations(axis, vel, max):
 					player_sprite.play("Turn")
 			else:
 				#idle
-				particle_trails.emitting = false
 				player_sprite.play("Idle")
 		else:
 			#jumping
-			particle_trails.emitting = false
 			player_sprite.play("Jump")
+	
+	if abs(vel) >= 10 and is_on_floor():
+		particle_trails.emitting = true
+	else:
+		particle_trails.emitting = false
 	
 	if vel < 0: 
 		player_sprite.flip_h = true
@@ -377,7 +379,7 @@ func rng():
 
 func cardsfunc():
 	while true:
-		await get_tree().create_timer(1).timeout
+		await get_tree().create_timer(100000).timeout
 		rng()
 		print(jump_force)
 

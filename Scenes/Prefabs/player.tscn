@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://w7m6tehvvy3g"]
+[gd_scene load_steps=23 format=3 uid="uid://w7m6tehvvy3g"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_qt7d6"]
 [ext_resource type="Texture2D" uid="uid://bqa87evqdbbbo" path="res://Assets/he stander.png" id="2_bpma6"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cvc4p4i6002nt" path="res://Assets/Spritesheet/the jumber.png" id="3_mgy1a"]
 [ext_resource type="Texture2D" uid="uid://c2gi03xy87wyy" path="res://Assets/Spritesheet/shmoovin 2.png" id="4_5n2qv"]
 [ext_resource type="Texture2D" uid="uid://e70lo75u1dw4" path="res://Assets/Spritesheet/Break em.png" id="5_6puin"]
+[ext_resource type="Texture2D" uid="uid://boe5vag204knt" path="res://Assets/Spritesheet/skater moving on board.png" id="6_xnwuq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7p5jx"]
 atlas = ExtResource("2_bpma6")
@@ -34,6 +35,10 @@ region = Rect2(384, 20, 127, 150)
 [sub_resource type="AtlasTexture" id="AtlasTexture_mx4y8"]
 atlas = ExtResource("5_6puin")
 region = Rect2(0, 20, 128, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_571ee"]
+atlas = ExtResource("6_xnwuq")
+region = Rect2(0, 30, 128, 150)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4nss6"]
 animations = [{
@@ -85,6 +90,14 @@ animations = [{
 "loop": true,
 "name": &"skatingidle",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_571ee")
+}],
+"loop": true,
+"name": &"skatingslide",
+"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dllpw"]
@@ -127,7 +140,7 @@ editor_draw_drag_margin = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_4nss6")
-animation = &"Idle"
+animation = &"skatingslide"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.5)
