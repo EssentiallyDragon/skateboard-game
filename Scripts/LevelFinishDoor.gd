@@ -5,10 +5,10 @@ extends Area2D
 @onready var jump_force : float = 600
 @onready var skate_speed : float = 400
 @onready var hurt_force : float = 350
-
+@onready var air_jumps : int = 0
 
 func jumpI():
-	jump_force = jump_force + jump_force * 0.10
+	jump_force + jump_force * 0.10
 func jumpII():
 	jump_force + jump_force * 0.25
 func jumpIII():
@@ -37,6 +37,8 @@ func hurtIV():
 	hurt_force + hurt_force * 1.00
 func hurtV():
 	hurt_force + hurt_force * 2.50
+func plusJump():
+	air_jumps += 1
 
 		
 var cards = [
@@ -59,8 +61,8 @@ var cardsize = cards.size() - 1
 
 func rng():
 	var index = randi_range(0, cardsize)
-	cards[0].call()
-	#print(index)
+	cards[index].call()
+	print(index)
 
 # Load next level scene when player collide with level finish door.
 func _on_body_entered(body):
