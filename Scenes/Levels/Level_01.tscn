@@ -297,5 +297,4 @@ text = "x 3"
 
 [node name="Sprite2D" parent="." instance=ExtResource("12_8ctxr")]
 top_level = true
-z_index = 100
 position = Vector2(226, 324)

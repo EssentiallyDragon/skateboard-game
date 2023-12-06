@@ -385,7 +385,7 @@ var cards = [
 ]
 var cardsize = cards.size() - 1
 
-
+@export var card_scene: PackedScene
 const CardResource = preload("res://Scenes/Prefabs/Card.tscn")
 
 func displaycards():
