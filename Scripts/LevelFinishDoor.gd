@@ -65,7 +65,10 @@ var cards = [
 	hurtII,
 	hurtIII,
 	hurtIV,
-	hurtV]
+	hurtV,
+	plusJump,
+	plusHealth,
+	plusVel]
 var cardsize = cards.size() - 1
 
 func rng():
