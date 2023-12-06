@@ -354,7 +354,7 @@ func plusVel():
 	velincrease += 50
 
 
-var cards = [
+var cardsold = [
 	jumpI,
 	jumpII,
 	jumpIII,
@@ -373,7 +373,24 @@ var cards = [
 	plusJump,
 	plusHealth,
 	plusVel]
+
+var cards = [
+	{
+		"Name" : "Speedup",
+		"Description" : "train those legs",
+		"Rarity" : 5,
+		"Func" : func():
+			pass,
+	}
+]
 var cardsize = cards.size() - 1
+
+
+const CardResource = preload("res://Scenes/Prefabs/Card.tscn")
+
+func displaycards():
+	var instance = CardResource.instance()
+	self.add_child(instance)
 
 func rng():
 	var index = randi_range(0, cardsize)
@@ -382,9 +399,10 @@ func rng():
 
 func cardsfunc():
 	while true:
-		await get_tree().create_timer(100000).timeout
+		await get_tree().create_timer(10000).timeout
 		rng()
 		print(jump_force)
 
 func _ready():
+	displaycards()
 	cardsfunc()

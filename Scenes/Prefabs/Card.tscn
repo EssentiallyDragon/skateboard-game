@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://ck0thtokpsfsi"]
+
+[ext_resource type="Texture2D" uid="uid://56vii4tv0sxs" path="res://Assets/Spritesheet/Playing-Card-PNG-Image.png" id="1_80nlu"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_qr4lg"]
+font_size = 75
+font_color = Color(0, 0, 0, 1)
+
+[node name="Card" type="Sprite2D"]
+z_index = 100
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_80nlu")
+region_rect = Rect2(320, 320, 64, 64)
+
+[node name="NameDisplay" type="Label" parent="."]
+anchors_preset = -1
+offset_left = -345.0
+offset_top = -525.0
+offset_right = 345.0
+offset_bottom = -365.0
+label_settings = SubResource("LabelSettings_qr4lg")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="Label" parent="."]
+anchors_preset = -1
+offset_left = -350.0
+offset_top = 10.0
+offset_right = 340.0
+offset_bottom = 520.0
+text = "
+"
+label_settings = SubResource("LabelSettings_qr4lg")
+horizontal_alignment = 1
+vertical_alignment = 1
