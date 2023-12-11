@@ -13,7 +13,6 @@ texture = ExtResource("1_80nlu")
 region_rect = Rect2(320, 320, 64, 64)
 
 [node name="NameDisplay" type="Label" parent="."]
-anchors_preset = -1
 offset_left = -345.0
 offset_top = -525.0
 offset_right = 345.0
@@ -23,7 +22,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Description" type="Label" parent="."]
-anchors_preset = -1
 offset_left = -350.0
 offset_top = 10.0
 offset_right = 340.0
