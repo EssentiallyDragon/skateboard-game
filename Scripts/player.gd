@@ -48,7 +48,21 @@ var undebounce = func():
 	OS.delay_msec(500)
 	switchdebounce = false
 
+var cardinstances = []
+
 func _input(event):
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		for x in range(0, cardinstances.size()):
+			var card = cardinstances [x]
+			
+			# fix this
+			var inx = (card.position + (card.size.x / 2) > event.position.x) or (card.position - (card.size.x / 2) < event.position.x)
+			var iny = (card.position + (card.size.y / 2) > event.position.y) or (card.position - (card.size.y / 2) < event.position.y)
+			
+			if inx and iny :
+				print(card.get_rect())
+				#print("You clicked on Sprite!")
+	
 	if Input.is_action_just_pressed("Switch Mode"):
 		if switchdebounce:
 			return
@@ -391,11 +405,27 @@ var cardsize = cards.size() - 1
 const CardResource = preload("res://Scenes/Prefabs/Card.tscn")
 
 func displaycards():
-	var instance = CardResource.instantiate()
+	
 	var vpsize = get_viewport().size / 2
-	instance.position = Vector2(vpsize.x, vpsize.y)
-	print(ui)
-	ui.add_child(instance)
+	
+	var i = 1
+	for x in range(-1, 2, 2):
+		for y in range(-1, 2, 2):
+			var instance = CardResource.instantiate()
+			instance.scale = Vector2(0,0)
+			instance.set_meta("Number", i)
+			i += 1
+			cardinstances.append(instance)
+			
+			var xoff = (vpsize.x / 4) * x
+			var yoff = (vpsize.y / 2) * y
+			instance.position = Vector2(vpsize.x + xoff, vpsize.y + yoff)
+			ui.add_child(instance)
+			var tween = create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+			tween.tween_property(instance, "scale", Vector2(.25,.25),.5)
+			await get_tree().create_timer(.1).timeout
+			
+
 
 func rng():
 	var index = randi_range(0, cardsize)
@@ -409,5 +439,6 @@ func cardsfunc():
 		print(jump_force)
 
 func _ready():
+	await get_tree().create_timer(2).timeout
 	displaycards()
 	cardsfunc()

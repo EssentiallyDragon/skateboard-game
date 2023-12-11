@@ -11,6 +11,7 @@ z_index = 100
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("1_80nlu")
 region_rect = Rect2(320, 320, 64, 64)
+metadata/number = 0
 
 [node name="NameDisplay" type="Label" parent="."]
 offset_left = -345.0
