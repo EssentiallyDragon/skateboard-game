@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cjanwm3sy2x37"]
+[gd_scene load_steps=19 format=3 uid="uid://cjanwm3sy2x37"]
 
 [ext_resource type="Script" path="res://Scenes/Levels/Level_01.gd" id="1_81htn"]
 [ext_resource type="PackedScene" uid="uid://cyti38f0lagf2" path="res://Scenes/Prefabs/LevelFinishDoor.tscn" id="1_oqkjg"]
@@ -11,7 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://xx45dgea72yh" path="res://Assets/Spritesheet/cobblestone_tiles.png" id="6_qnx6o"]
 [ext_resource type="Texture2D" uid="uid://clreg520jah1j" path="res://Assets/platformPack_item008.png" id="7_j7jun"]
 [ext_resource type="FontFile" uid="uid://qgc4vi5osk7v" path="res://Assets/Fonts/Star Choco.ttf" id="8_gwcy2"]
-[ext_resource type="PackedScene" uid="uid://ck0thtokpsfsi" path="res://Scenes/Prefabs/Card.tscn" id="12_8ctxr"]
 
 [sub_resource type="Curve2D" id="Curve2D_46nc8"]
 _data = {
@@ -294,7 +293,3 @@ theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("8_gwcy2")
 theme_override_font_sizes/font_size = 32
 text = "x 3"
-
-[node name="Sprite2D" parent="." instance=ExtResource("12_8ctxr")]
-top_level = true
-position = Vector2(226, 324)

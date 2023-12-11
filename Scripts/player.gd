@@ -40,6 +40,7 @@ var speed : float
 @onready var death_particles = $DeathParticles
 @onready var switch_particles = $switchparticles
 @onready var next_scene = PackedScene
+@onready var ui = get_parent().get_node("UserInterface")
 
 # --------- BUILT-IN FUNCTIONS ---------- #
 
@@ -64,6 +65,7 @@ var iframeson = false
 func _process(dt):
 	#print(savedhealth)
 	#print(health)
+	
 	if savedhealth != health:
 		if iframeson:
 			health = savedhealth
@@ -389,8 +391,11 @@ var cardsize = cards.size() - 1
 const CardResource = preload("res://Scenes/Prefabs/Card.tscn")
 
 func displaycards():
-	var instance = CardResource.instance()
-	self.add_child(instance)
+	var instance = CardResource.instantiate()
+	var vpsize = get_viewport().size / 2
+	instance.position = Vector2(vpsize.x, vpsize.y)
+	print(ui)
+	ui.add_child(instance)
 
 func rng():
 	var index = randi_range(0, cardsize)
