@@ -21,6 +21,7 @@ offset_bottom = -365.0
 label_settings = SubResource("LabelSettings_qr4lg")
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 1
 
 [node name="Description" type="Label" parent="."]
 offset_left = -350.0

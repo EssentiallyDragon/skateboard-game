@@ -55,13 +55,27 @@ func _input(event):
 		for x in range(0, cardinstances.size()):
 			var card = cardinstances [x]
 			
-			# fix this
-			var inx = (card.position + (card.size.x / 2) > event.position.x) or (card.position - (card.size.x / 2) < event.position.x)
-			var iny = (card.position + (card.size.y / 2) > event.position.y) or (card.position - (card.size.y / 2) < event.position.y)
+			var size = card.texture.get_size() * card.scale
+			
+			# behold: the click detector
+			var inx = (card.position.x + (size.x / 2) > event.position.x) and (card.position.x - (size.x / 2) < event.position.x)
+			var iny = (card.position.y + (size.y / 2) > event.position.y) and (card.position.y - (size.y / 2) < event.position.y)
 			
 			if inx and iny :
-				print(card.get_rect())
-				#print("You clicked on Sprite!")
+				
+				for y in range(0, cardinstances.size()):
+					if y == x:
+						continue
+					var tween = create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD)
+					tween.tween_property(cardinstances [y], "scale", Vector2(0,0),.4)				
+				cardinstances.clear()
+				
+				var tween = create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_BACK)
+				
+				tween.tween_property(card, "scale", Vector2(0,0),1.3)
+				
+				#await tween.finished
+				break
 	
 	if Input.is_action_just_pressed("Switch Mode"):
 		if switchdebounce:
@@ -76,9 +90,37 @@ func _input(event):
 
 var savedhealth = health
 var iframeson = false
+var hoveredcard = null
 func _process(dt):
 	#print(savedhealth)
 	#print(health)
+	
+	var oldhovercard = hoveredcard
+	var changed = false
+	for x in range(0, cardinstances.size()):
+		var card = cardinstances [x]
+		var mp = get_viewport().get_mouse_position()
+		var size = card.texture.get_size() * card.scale
+		
+		
+		# behold: the positon detector
+		var inx = (card.position.x + (size.x / 2) > mp.x) and (card.position.x - (size.x / 2) < mp.x)
+		var iny = (card.position.y + (size.y / 2) > mp.y) and (card.position.y - (size.y / 2) < mp.y)
+		
+		if inx and iny :
+			hoveredcard = card
+			changed = true
+			var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+			tween.tween_property(card, "scale", Vector2(.28,.28),.3)
+			break
+
+	if not changed:
+		hoveredcard = null
+	
+	if oldhovercard != hoveredcard and cardinstances.size() >= 1:
+		# tween smaller
+		var tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUAD)
+		tween.tween_property(oldhovercard, "scale", Vector2(.25,.25),.3)
 	
 	if savedhealth != health:
 		if iframeson:
@@ -231,7 +273,7 @@ func player_animations(axis, vel, max):
 			if axis != 0:
 				if (vel / abs(vel)) == axis:
 					# vel in move direction
-					player_sprite.play("skatingslide", abs(vel) / max)
+					player_sprite.play("boardwalk", abs(vel) / max)
 				else:
 					#vel against move direction
 					player_sprite.play("skatingslide")
@@ -397,6 +439,27 @@ var cards = [
 		"Rarity" : 5,
 		"Func" : func():
 			pass,
+	},
+	{
+		"Name" : "Speedup2",
+		"Description" : "train those legs",
+		"Rarity" : 5,
+		"Func" : func():
+			pass,
+	},
+	{
+		"Name" : "Speedup3",
+		"Description" : "train those legs",
+		"Rarity" : 5,
+		"Func" : func():
+			pass,
+	},
+	{
+		"Name" : "Speedup4",
+		"Description" : "train those legs",
+		"Rarity" : 5,
+		"Func" : func():
+			pass,
 	}
 ]
 var cardsize = cards.size() - 1
@@ -408,14 +471,26 @@ func displaycards():
 	
 	var vpsize = get_viewport().size / 2
 	
+	var usedcards = []
+	
 	var i = 1
 	for x in range(-1, 2, 2):
 		for y in range(-1, 2, 2):
+			var index = randi_range(0, cardsize)
+			while usedcards.has(cards [index].Name):
+				index = randi_range(0, cardsize)
+			var card = cards [index]
+			usedcards.append(card.Name)
+			
 			var instance = CardResource.instantiate()
 			instance.scale = Vector2(0,0)
 			instance.set_meta("Number", i)
+			
 			i += 1
 			cardinstances.append(instance)
+			
+			instance.get_node("NameDisplay").text = card.Name
+			instance.get_node("Description").text = card.Description
 			
 			var xoff = (vpsize.x / 4) * x
 			var yoff = (vpsize.y / 2) * y

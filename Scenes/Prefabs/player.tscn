@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://w7m6tehvvy3g"]
+[gd_scene load_steps=30 format=3 uid="uid://w7m6tehvvy3g"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_qt7d6"]
 [ext_resource type="Texture2D" uid="uid://bqa87evqdbbbo" path="res://Assets/he stander.png" id="2_bpma6"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://cvc4p4i6002nt" path="res://Assets/Spritesheet/the jumber.png" id="3_mgy1a"]
 [ext_resource type="Texture2D" uid="uid://c2gi03xy87wyy" path="res://Assets/Spritesheet/shmoovin 2.png" id="4_5n2qv"]
 [ext_resource type="Texture2D" uid="uid://e70lo75u1dw4" path="res://Assets/Spritesheet/Break em.png" id="5_6puin"]
+[ext_resource type="Texture2D" uid="uid://c5cu3grj27564" path="res://boarder 1.png" id="5_nmvww"]
+[ext_resource type="Texture2D" uid="uid://f70g2lm32xdg" path="res://boarder 2.png" id="6_lnkcc"]
 [ext_resource type="Texture2D" uid="uid://boe5vag204knt" path="res://Assets/Spritesheet/skater moving on board.png" id="6_xnwuq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7p5jx"]
@@ -31,6 +33,26 @@ region = Rect2(256, 20, 127, 150)
 [sub_resource type="AtlasTexture" id="AtlasTexture_ajxqv"]
 atlas = ExtResource("4_5n2qv")
 region = Rect2(384, 20, 127, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cgc11"]
+atlas = ExtResource("5_nmvww")
+region = Rect2(0, 4, 128, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u8juh"]
+atlas = ExtResource("5_nmvww")
+region = Rect2(128, 4, 128, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r6cgg"]
+atlas = ExtResource("5_nmvww")
+region = Rect2(256, 4, 128, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dnnmc"]
+atlas = ExtResource("5_nmvww")
+region = Rect2(384, 4, 128, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dfouy"]
+atlas = ExtResource("6_lnkcc")
+region = Rect2(178, 15, 128, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mx4y8"]
 atlas = ExtResource("5_6puin")
@@ -81,6 +103,26 @@ animations = [{
 }],
 "loop": true,
 "name": &"Walk",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cgc11")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u8juh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r6cgg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dnnmc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dfouy")
+}],
+"loop": true,
+"name": &"boardwalk",
 "speed": 6.0
 }, {
 "frames": [{
@@ -140,7 +182,7 @@ editor_draw_drag_margin = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_4nss6")
-animation = &"skatingslide"
+animation = &"Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.5)
