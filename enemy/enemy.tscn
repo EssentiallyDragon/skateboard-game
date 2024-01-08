@@ -208,7 +208,6 @@ position = Vector2(126, -8)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("1")
-position = Vector2(68.5, -22.5)
 scale = Vector2(5.28125, 2.40625)
 texture = ExtResource("4")
 flip_h = true

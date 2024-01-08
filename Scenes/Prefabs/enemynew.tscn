@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://cf7wsf6gmgf5k"]
+
+[ext_resource type="Texture2D" uid="uid://cdy6gikv8wka7" path="res://enemy/enemy.webp" id="1_f2cl2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dllpw"]
+size = Vector2(54, 129)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tvbjh"]
+size = Vector2(54, 129.25)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_6vuh0"]
+
+[node name="enemynew" type="CharacterBody2D" groups=["Player"]]
+metadata/_edit_horizontal_guides_ = []
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+scale = Vector2(2.5, 0.25)
+shape = SubResource("RectangleShape2D_dllpw")
+
+[node name="Collision" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision"]
+position = Vector2(0, 0.375)
+scale = Vector2(2.5, 0.25)
+shape = SubResource("RectangleShape2D_tvbjh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_6vuh0")
+scale = Vector2(5.28125, 2.40625)
+texture = ExtResource("1_f2cl2")
+flip_h = true
+hframes = 8
+
+[connection signal="body_entered" from="Collision" to="." method="_on_collision_body_entered"]

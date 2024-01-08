@@ -1,11 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://cjanwm3sy2x37"]
+[gd_scene load_steps=18 format=3 uid="uid://cjanwm3sy2x37"]
 
 [ext_resource type="Script" path="res://Scenes/Levels/Level_01.gd" id="1_81htn"]
-[ext_resource type="PackedScene" uid="uid://cyti38f0lagf2" path="res://Scenes/Prefabs/LevelFinishDoor.tscn" id="1_oqkjg"]
 [ext_resource type="PackedScene" uid="uid://w7m6tehvvy3g" path="res://Scenes/Prefabs/player.tscn" id="2_pay8t"]
 [ext_resource type="PackedScene" uid="uid://bfmh3fm2de78o" path="res://Scenes/Prefabs/Coin.tscn" id="3_rrh80"]
 [ext_resource type="Script" path="res://Scripts/GameManager.gd" id="4_vgfkr"]
-[ext_resource type="PackedScene" uid="uid://bd478yrtijbfn" path="res://enemy/enemy.tscn" id="5_3v8bs"]
 [ext_resource type="Script" path="res://Scenes/Levels/MobPath.gd" id="5_322jm"]
 [ext_resource type="Texture2D" uid="uid://jaegp53ccc7w" path="res://Assets/Spritesheet/platformPack_tilesheet.png" id="5_wqbaa"]
 [ext_resource type="Script" path="res://Scripts/GameUI.gd" id="6_66mfc"]
@@ -164,18 +162,10 @@ sources/4 = SubResource("TileSetAtlasSource_m57sf")
 [node name="Level_01" type="Node2D"]
 script = ExtResource("1_81htn")
 
-[node name="LevelFinishDoor" parent="." instance=ExtResource("1_oqkjg")]
-z_index = 1
-position = Vector2(0, 400)
-
 [node name="Player" parent="." instance=ExtResource("2_pay8t")]
 z_index = 1
 position = Vector2(150, 318)
 health = 100.0
-
-[node name="Enemy" parent="." instance=ExtResource("5_3v8bs")]
-position = Vector2(318, 430)
-scale = Vector2(1.07797, 1)
 
 [node name="MobTimer" type="Timer" parent="."]
 wait_time = 10.0
@@ -193,13 +183,7 @@ scale = Vector2(0.835511, -1.95682)
 [node name="Coins" type="Node2D" parent="."]
 
 [node name="Coin" parent="Coins" instance=ExtResource("3_rrh80")]
-position = Vector2(576, 406)
-
-[node name="Coin2" parent="Coins" instance=ExtResource("3_rrh80")]
-position = Vector2(712, 353)
-
-[node name="Coin3" parent="Coins" instance=ExtResource("3_rrh80")]
-position = Vector2(844, 408)
+position = Vector2(750, 353)
 
 [node name="Level" type="Node2D" parent="."]
 
@@ -226,30 +210,31 @@ format = 2
 
 [node name="Movement" type="Label" parent="TutorialText"]
 offset_left = 264.0
-offset_top = 336.0
-offset_right = 542.0
-offset_bottom = 420.0
+offset_top = 288.0
+offset_right = 550.0
+offset_bottom = 462.0
 theme_override_colors/font_color = Color(0.910156, 0.730469, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("8_gwcy2")
 theme_override_font_sizes/font_size = 32
 text = "A & D To Move
-Spacebar To Jump"
+Spacebar To Jump
+F to change modes"
 
 [node name="SetNextScene" type="Label" parent="TutorialText"]
-offset_left = 808.0
-offset_top = 256.0
-offset_right = 1239.0
+offset_left = 580.0
+offset_top = 233.0
+offset_right = 961.0
 offset_bottom = 382.0
 theme_override_colors/font_color = Color(0.910156, 0.730469, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("8_gwcy2")
 theme_override_font_sizes/font_size = 32
-text = "Level Finish
-Set the next scene
-from \"LevelFinishDoor\" Area"
+text = "Collect Gems to upgrade 
+your character"
+horizontal_alignment = 1
 
 [node name="GameManager" type="Node2D" parent="."]
 script = ExtResource("4_vgfkr")

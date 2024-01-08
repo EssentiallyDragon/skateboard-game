@@ -582,8 +582,12 @@ func displaycards():
 			tween.tween_property(instance, "scale", Vector2(.25,.25),.5)
 			await get_tree().create_timer(.1).timeout
 	
-
 func _ready():
+	var savedscore = 0
 	while true:
-		await get_tree().create_timer(15).timeout
-		displaycards()
+		await get_tree().create_timer(.05).timeout
+		var newscore =  GameManager.get_score()
+		if newscore != savedscore:
+			savedscore = newscore
+			displaycards()
+		
