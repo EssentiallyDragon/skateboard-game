@@ -1,6 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://ck0thtokpsfsi"]
+[gd_scene load_steps=6 format=3 uid="uid://ck0thtokpsfsi"]
 
+[ext_resource type="Shader" path="res://Scenes/Prefabs/outline.gdshader" id="1_8roug"]
 [ext_resource type="Texture2D" uid="uid://56vii4tv0sxs" path="res://Assets/Spritesheet/Playing-Card-PNG-Image.png" id="1_80nlu"]
+[ext_resource type="Script" path="res://Scenes/Prefabs/outline.gd" id="3_6juxs"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0abw1"]
+shader = ExtResource("1_8roug")
+shader_parameter/line_color = Vector4(1, 1, 1, 1)
+shader_parameter/line_thickness = 1.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_qr4lg"]
 font_size = 75
@@ -8,9 +15,12 @@ font_color = Color(0, 0, 0, 1)
 
 [node name="Card" type="Sprite2D"]
 z_index = 100
+material = SubResource("ShaderMaterial_0abw1")
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("1_80nlu")
-region_rect = Rect2(320, 320, 64, 64)
+region_enabled = true
+region_rect = Rect2(-45.0239, -63.0378, 770.893, 1173.43)
+script = ExtResource("3_6juxs")
 metadata/number = 0
 
 [node name="NameDisplay" type="Label" parent="."]

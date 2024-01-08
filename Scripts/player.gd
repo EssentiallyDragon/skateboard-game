@@ -24,9 +24,6 @@ extends CharacterBody2D
 var switchdebounce : bool = false
 var jump_count : int = 1
 
-
-
-
 var skating: bool = false
 
 @export_category("Toggle Functions") # Double jump feature is disable by default (Can be toggled from inspector)
@@ -50,6 +47,10 @@ var undebounce = func():
 
 var cardinstances = []
 
+func destroycard(time, card):
+	await get_tree().create_timer(time).timeout
+	card.queue_free()
+
 func _input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		for x in range(0, cardinstances.size()):
@@ -63,16 +64,28 @@ func _input(event):
 			
 			if inx and iny :
 				
+				cards [card.get_meta("Cardnum")].Func.call()
+				
 				for y in range(0, cardinstances.size()):
 					if y == x:
 						continue
 					var tween = create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD)
-					tween.tween_property(cardinstances [y], "scale", Vector2(0,0),.4)				
+					tween.tween_property(cardinstances [y], "scale", Vector2(0,0),.4)
+					
+					var thread = Thread.new()
+					# You can bind multiple arguments to a function Callable.
+					thread.start(destroycard.bind(.5, cardinstances[y]))
+					
 				cardinstances.clear()
 				
 				var tween = create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_BACK)
 				
 				tween.tween_property(card, "scale", Vector2(0,0),1.3)
+				await tween.finished
+				
+				var thread = Thread.new()
+				# You can bind multiple arguments to a function Callable.
+				thread.start(destroycard.bind(1.5, card))
 				
 				#await tween.finished
 				break
@@ -180,7 +193,6 @@ func cameraeffects(dt):
 
 func movement(dt):
 	# Gravity
-	
 	var airborn : bool
 	if !is_on_floor():
 		velocity.y += gravity
@@ -209,24 +221,6 @@ func movement(dt):
 		increase = velincrease
 		decrease = veldecrease
 	
-	"""
-	if inputAxis > 0:
-		if curvel < 0:
-			change = clamp(decrease * dt, 0, speed)
-		else:
-			change = clamp(increase * dt, 0, speed)
-	elif inputAxis < 0:
-		if curvel > 0:
-			change = clamp(-decrease * dt, -speed, 0)
-		else:
-			change = clamp(-increase * dt, -speed, 0)
-	else:
-		if curvel > 0:
-			change = clamp(-decrease * dt, -curvel, 0)
-		else:
-			change = clamp(decrease * dt, 0, -curvel)
-	"""
-	
 	if inputAxis > 0:
 		# moving right
 		if curvel < 0:
@@ -251,7 +245,7 @@ func movement(dt):
 	move_and_slide()
 	player_animations(inputAxis, velocity.x, speed)
 
-# Handles jumping functionality (double jump or single jump, can be toggled from inspector)
+# Handles jumping functionality (double jump or single jump, can be toggled from inspector)ZA
 func handle_jumping():
 	if Input.is_action_just_pressed("Jump"):
 		if is_on_floor():
@@ -394,73 +388,156 @@ func speedIV():
 func speedV():
 	move_speed += 100
 	skate_speed += 200
-func damageI():
-	damage += 1
-func damageII():
-	damage += 2
-func damageIII():
-	damage += 5
-func damageIV():
-	damage += 8
-func damageV():
-	damage += 15
-func plusJump():
+func multijump():
 	air_jumps += 1
-func plusHealth():
-	maxhealth += 50
-func plusVel():
-	velincrease += 50
-
-
-var cardsold = [
-	jumpI,
-	jumpII,
-	jumpIII,
-	jumpIV,
-	jumpV,
-	speedI,
-	speedII,
-	speedIII,
-	speedIV,
-	speedV,
-	damageI,
-	damageII,
-	damageIII,
-	damageIV,
-	damageV,
-	plusJump,
-	plusHealth,
-	plusVel]
+	
+var Rarities = {
+	"Legendary" = [2, Color.GOLD],
+	"Epic" = [8, Color.MEDIUM_PURPLE],
+	"Rare" = [15, Color.DODGER_BLUE],
+	"Uncommon" = [25, Color.GREEN],
+	"Common" = [50, Color.WHITE]
+}
 
 var cards = [
 	{
-		"Name" : "Speedup",
-		"Description" : "train those legs",
-		"Rarity" : 5,
-		"Func" : func():
-			pass,
+		"Name" : "Jump I",
+		"Description" : "+20 jump force",
+		"Rarity" : "Common",
+		"Func" : jumpI,
 	},
 	{
-		"Name" : "Speedup2",
-		"Description" : "train those legs",
-		"Rarity" : 5,
-		"Func" : func():
-			pass,
+		"Name" : "Jump II",
+		"Description" : "+50 jump force",
+		"Rarity" : "Uncommon",
+		"Func" : jumpII,
 	},
 	{
-		"Name" : "Speedup3",
-		"Description" : "train those legs",
-		"Rarity" : 5,
-		"Func" : func():
-			pass,
+		"Name" : "Jump III",
+		"Description" : "+100 jump force",
+		"Rarity" : "Rare",
+		"Func" : jumpIII,
 	},
 	{
-		"Name" : "Speedup4",
-		"Description" : "train those legs",
-		"Rarity" : 5,
+		"Name" : "Jump IV",
+		"Description" : "+175 jump force",
+		"Rarity" : "Epic",
+		"Func" : jumpIV,
+	},
+	{
+		"Name" : "Jump V",
+		"Description" : "+250 jump force",
+		"Rarity" : "Legendary",
+		"Func" : jumpV,
+	},
+	{
+		"Name" : "Speed I",
+		"Description" : "+25 move speed
+		+40 skate speed",
+		"Rarity" : "Common",
+		"Func" : speedI,
+	},
+	{
+		"Name" : "Speed II",
+		"Description" : "+40 move speed
+		+70 skate speed",
+		"Rarity" : "Uncommon",
+		"Func" : speedII,
+	},
+	{
+		"Name" : "Speed III",
+		"Description" : "+60 move speed
+		+100 skate speed",
+		"Rarity" : "Rare",
+		"Func" : speedIII,
+	},
+	{
+		"Name" : "Speed IV",
+		"Description" : "+80 move speed
+		+150 skate speed",
+		"Rarity" : "Epic",
+		"Func" : speedIV,
+	},
+	{
+		"Name" : "Speed V",
+		"Description" : "+100 move speed
+		+200 skate speed",
+		"Rarity" : "Legendary",
+		"Func" : speedV,
+	},
+	{
+		"Name" : "Multi Jump",
+		"Description" : "+1 air jump",
+		"Rarity" : "Epic",
+		"Func" : multijump,
+	},
+	{
+		"Name" : "Super Jumper",
+		"Description" : "+1 air jumps
+		+ 150 jump force",
+		"Rarity" : "Epic",
 		"Func" : func():
-			pass,
-	}
+			air_jumps += 2
+			jump_force += 150,
+	},
+	{
+		"Name" : "Lower Gravity",
+		"Description" : "Lower Gravity",
+		"Rarity" : "Rare",
+		"Func" : func():
+			gravity /= 1.1,
+	},
+	{
+		"Name" : "Air control I",
+		"Description" : "+10 air control",
+		"Rarity" : "Common",
+		"Func" : func():
+			airvelincrease += 10,
+	},
+	{
+		"Name" : "Air control II",
+		"Description" : "+25 air control",
+		"Rarity" : "Uncommon",
+		"Func" : func():
+			airvelincrease += 25,
+	},
+	{
+		"Name" : "Air control III",
+		"Description" : "+50 air control",
+		"Rarity" : "Rare",
+		"Func" : func():
+			airvelincrease += 50,
+	},
+	{
+		"Name" : "Air control IV",
+		"Description" : "+80 air control",
+		"Rarity" : "Epic",
+		"Func" : func():
+			airvelincrease += 80,
+	},
+	{
+		"Name" : "Air control V",
+		"Description" : "+125 air control",
+		"Rarity" : "Legendary",
+		"Func" : func():
+			airvelincrease += 125,
+	},
+	{
+		"Name" : "Insta Accelerate",
+		"Description" : "+1000 walking acceleration
+		+200 skating acceleration",
+		"Rarity" : "Legendary",
+		"Func" : func():
+			velincrease += 1000
+			skatingincrease += 200,
+	},
+	{
+		"Name" : "frictionless skateboard",
+		"Description" : "No skatboard deceleration",
+		"Rarity" : "Legendary",
+		"Func" : func():
+			skatingdecrease = 0,
+	},
 ]
 var cardsize = cards.size() - 1
 
@@ -469,24 +546,29 @@ const CardResource = preload("res://Scenes/Prefabs/Card.tscn")
 
 func displaycards():
 	
+	var pickablecards = []
+	for y in range(0, cardsize + 1):
+		var card = cards [y]
+		for x in range(0, Rarities[card.Rarity] [0]):
+			pickablecards.append(y)
+	
 	var vpsize = get_viewport().size / 2
 	
 	var usedcards = []
 	
-	var i = 1
 	for x in range(-1, 2, 2):
 		for y in range(-1, 2, 2):
-			var index = randi_range(0, cardsize)
+			var index =  pickablecards [randi_range(0, pickablecards.size() - 1)]
 			while usedcards.has(cards [index].Name):
-				index = randi_range(0, cardsize)
+				index =  pickablecards [randi_range(0, pickablecards.size() - 1)]
+			
 			var card = cards [index]
 			usedcards.append(card.Name)
 			
 			var instance = CardResource.instantiate()
 			instance.scale = Vector2(0,0)
-			instance.set_meta("Number", i)
+			instance.set_meta("Cardnum", index)
 			
-			i += 1
 			cardinstances.append(instance)
 			
 			instance.get_node("NameDisplay").text = card.Name
@@ -499,21 +581,9 @@ func displaycards():
 			var tween = create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 			tween.tween_property(instance, "scale", Vector2(.25,.25),.5)
 			await get_tree().create_timer(.1).timeout
-			
-
-
-func rng():
-	var index = randi_range(0, cardsize)
-	cards[index].call()
-	print(index)
-
-func cardsfunc():
-	while true:
-		await get_tree().create_timer(10000).timeout
-		rng()
-		print(jump_force)
+	
 
 func _ready():
-	await get_tree().create_timer(2).timeout
-	displaycards()
-	cardsfunc()
+	while true:
+		await get_tree().create_timer(15).timeout
+		displaycards()
